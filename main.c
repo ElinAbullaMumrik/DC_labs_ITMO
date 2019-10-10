@@ -24,9 +24,9 @@ int main(int argc, char *argv[]) {
             break;
         }
     }
-    int array[128];
-    get_arr(*image, array);
-    for (int i = 0; i < 128; i++) {
+    int array[13];
+    occurrence_counter(*image, array);
+    for (int i = 0; i < 13; i++) {
         printf("%d ", array[i]);
     }
 }

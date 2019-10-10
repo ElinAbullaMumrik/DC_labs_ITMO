@@ -31,10 +31,14 @@ read_status from_bmp(FILE *in, image_t *const read) {
     return READ_OK;
 }
 
-int *get_arr(const image_t image, int *array) {
+int *occurrence_counter(const image_t image, int *array) {
+    for (int j = 0; j < 13; ++j) {
+        array[j]=0;
+    }
     for (int i = 0; i < 128; i++) {
         pixel_t temp = image.data[image.width * 63 + i];
-        array[i] =  round((0.299 * temp.r + 0.587 * temp.g + 0.114 * temp.b)/ 20) * 20 ;
+        int temp1 = round((0.299 * temp.r + 0.587 * temp.g + 0.114 * temp.b)/ 20);
+        array[temp1-1]++;
     }
     return array;
 }
