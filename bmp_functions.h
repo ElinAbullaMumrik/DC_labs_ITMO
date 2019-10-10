@@ -43,6 +43,6 @@ typedef enum {
 
 read_status from_bmp(FILE *in, image_t *const read);
 
-int *occurrence_counter(const image_t image, int *array);
-
+int *occurrence_counter(int *in_arr, int *out_arr);
+int *get_arr(const image_t image, int *array);
 #endif //DC_LAB2_BMP_FUNCTIONS_H

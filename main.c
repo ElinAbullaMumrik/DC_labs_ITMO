@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "bmp_functions.h"
+#include <math.h>
 
 int main(int argc, char *argv[]) {
     FILE *file = fopen(argv[1], "rb");
@@ -24,9 +25,26 @@ int main(int argc, char *argv[]) {
             break;
         }
     }
-    int array[13];
-    occurrence_counter(*image, array);
-    for (int i = 0; i < 13; i++) {
-        printf("%d ", array[i]);
+    int sum = 0;
+    int char_array[128];
+    int array_occ[14];
+    get_arr(*image, char_array);
+    occurrence_counter(char_array, array_occ);
+    for (int i = 0; i < 14; i++) {
+        printf("%d ", array_occ[i]);
+        sum += array_occ[i];
     }
+    double entropy = 0;
+    for (int i = 0; i < 14; i++) {
+        double temp = (double) array_occ[i] / 128;
+        printf("%lf ", temp);
+        if (temp != 0) {
+            entropy = entropy - temp * log2(temp);
+        }
+    }
+    printf("%lf ", entropy);
+    printf("%lf ", entropy * 128);
+    printf("%d ", sum);
+    int array1[128];
+    get_arr(*image, array1);
 }
