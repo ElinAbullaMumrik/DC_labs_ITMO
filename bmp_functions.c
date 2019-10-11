@@ -43,10 +43,9 @@ int *occurrence_counter(int *in_arr, int *out_arr) {
 }
 
 int *get_arr(const image_t image, int *array) {
-    for (int i = 0; i < 128; i++) {
-        pixel_t temp = image.data[image.width * 63 + i];
+    for (int i = 0; i < image.width; i++) {
+        pixel_t temp = image.data[image.width *image.width/2 + i];
         array[i] = round((0.299 * temp.r + 0.587 * temp.g + 0.114 * temp.b) / 20) * 20;
-        printf("%d ", array[i]);
     }
     return array;
 }

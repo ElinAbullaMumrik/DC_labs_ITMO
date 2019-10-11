@@ -1,7 +1,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "bmp_functions.h"
+#include "fun_coding.h"
 #include <math.h>
+#include <string.h>
 
 int main(int argc, char *argv[]) {
     FILE *file = fopen(argv[1], "rb");
@@ -28,8 +30,8 @@ int main(int argc, char *argv[]) {
     int sum = 0;
     int char_array[128];
     int array_occ[14];
-    get_arr(*image, char_array);
-    occurrence_counter(char_array, array_occ);
+    get_arr(*image, char_array); //char_array -- массив, где лежат числа, кратные 2
+    occurrence_counter(char_array, array_occ); // array_occ -- массив, где лежит количество встречаний каждого элемента
     for (int i = 0; i < 14; i++) {
         printf("%d ", array_occ[i]);
         sum += array_occ[i];
@@ -37,14 +39,21 @@ int main(int argc, char *argv[]) {
     double entropy = 0;
     for (int i = 0; i < 14; i++) {
         double temp = (double) array_occ[i] / 128;
-        printf("%lf ", temp);
         if (temp != 0) {
             entropy = entropy - temp * log2(temp);
         }
     }
     printf("%lf ", entropy);
     printf("%lf ", entropy * 128);
-    printf("%d ", sum);
+    printf("%d ", sum);//sum -- переменная, которая считает длину считанной последовательности. была нужна для дебага
     int array1[128];
     get_arr(*image, array1);
+    char ready_fano [768];
+    char test[7] = "rty";
+    strcat(test, "qwe");
+    printf("%s", test);
+    make_a_code(128, char_array, ready_fano);
+    for (int i =0; i<768; i++){
+        printf("%c", ready_fano[i]);
+    }
 }
