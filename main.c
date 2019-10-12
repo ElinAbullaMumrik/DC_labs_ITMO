@@ -1,7 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "bmp_functions.h"
-#include "fun_coding.h"
 #include <math.h>
 #include <string.h>
 
@@ -48,12 +47,55 @@ int main(int argc, char *argv[]) {
     printf("%d ", sum);//sum -- переменная, которая считает длину считанной последовательности. была нужна для дебага
     int array1[128];
     get_arr(*image, array1);
-    char ready_fano [768];
-    char test[7] = "rty";
-    strcat(test, "qwe");
-    printf("%s", test);
-    make_a_code(128, char_array, ready_fano);
-    for (int i =0; i<768; i++){
-        printf("%c", ready_fano[i]);
+    char ready_fano[768] = "";
+    for (int i = 0; i < 128; i++) { //получается 398 символов
+        switch (char_array[i]) {
+            case 0:
+                strcat(ready_fano, "11011");
+                break;
+            case 20:
+                strcat(ready_fano, "11011");
+                break;
+            case 40:
+                strcat(ready_fano, "11100");
+                break;
+            case 60:
+                strcat(ready_fano, "1100");
+                break;
+            case 80:
+                strcat(ready_fano, "111101");
+                break;
+            case 100:
+                strcat(ready_fano, "111110");
+                break;
+            case 120:
+                strcat(ready_fano, "101");
+                break;
+            case 140:
+                strcat(ready_fano, "01");
+                break;
+            case 160:
+                strcat(ready_fano, "00");
+                break;
+            case 180:
+                strcat(ready_fano, "100");
+                break;
+            case 200:
+                strcat(ready_fano, "11010");
+                break;
+            case 220:
+                strcat(ready_fano, "111010");
+                break;
+            case 240:
+                strcat(ready_fano, "111111");
+                break;
+            case 260:
+                strcat(ready_fano, "111011");
+                break;
+        }
     }
+//    for (int i = 0; i < 768; i++) {
+//        printf("%c", ready_fano[i]);
+//    }
+printf("%s", ready_fano);
 }
